@@ -1,4 +1,5 @@
-## The offical PyTorch code for paper [""SIRS: Multi-task Joint Learning for Remote Sensing Foreground-entity Image-text Retrieval"", TGRS 2024.]()
+## The offical PyTorch code for paper 
+[""SIRS: Multi-task Joint Learning for Remote Sensing Foreground-entity Image-text Retrieval"", TGRS 2024.]()
 
 ##### Author: Zicong Zhu
 
