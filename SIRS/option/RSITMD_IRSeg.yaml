@@ -1,0 +1,66 @@
+model:
+    multiscale:
+        multiscale_input_channel: 3
+        multiscale_output_channel: 1
+    cross_attention:
+        att_type: "soft_att"
+    seq2vec:
+        arch: skipthoughts
+        dir_st: /home/zzc/data/skipthoughts
+        type: BayesianUniSkip
+        dropout: 0.25
+        fixed_emb: False
+    embed:
+        embed_dim: 512
+    decoder:
+        final_conv_kernel: 1
+        num_classes: 15
+    VFM:
+        sample: mean
+        mapping: linear
+    SSA:
+        weighting: linear
+        downsample: averagePooling
+        normalization: None
+    name: IRSeg
+    # backbone: resnet50
+    backbone: resnet18
+dataset:
+    datatype: rsitmd
+    # data_split: trainval
+    data_split: all
+    data_path: '/home/zzc/code/private/SIRS/data/rsitmd_precomp/'
+    image_path: '/home/zzc/data/IR/RSITMD/images/'
+    seg_path: '/home/zzc/data/IR/RSITMD/mask/'
+    # seg_path: '/root/autodl-tmp/zzc_backup/data/RSITMD/mask_v3/'
+    vocab_path: '/home/zzc/code/private/SIRS/data/vocab/rsitmd_splits_vocab.json'
+    # batch_size: 128
+    # batch_size_val: 64
+    batch_size: 32
+    batch_size_val: 8
+    train_workers: 4
+    test_workers: 0
+optim:
+    epochs: 35
+    lr: 0.0002
+    lr_decay_param: 0.7
+    lr_update_epoch: 20
+    grad_clip: 0
+    max_violation: 0
+    margin: 0.2
+    resume: False
+    last_num_epochs_val: 10
+    # last_num_epochs_val: 35
+    weight_save: False
+    loss_weight:
+        SS: 80
+        IR: 20
+logs:
+    eval_step: 1
+    print_freq: 10
+    ckpt_save_path: "/home/zzc/archive/IRSeg_series/"
+    logger_name: '/home/zzc/archive/IRSeg_series/'
+k_fold:
+    experiment_name: 'rsitmd_irseg_v10_all_resnet50'
+    nums: 10
+    current_num: 0

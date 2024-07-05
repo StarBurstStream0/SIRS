@@ -12,6 +12,7 @@
 #### News:
 #### 2024.05.11: SIRS and RSITMD-SS is expected to be released after the paper open to access.
 #### 2024.06.22: Dataset label RSITMD-SS is open source!
+#### 2024.07.05: code of SIRS is open source!  
 ```
 
 ## INTRODUCTION
@@ -24,6 +25,10 @@ It is a multi-task joint learning framework for plug-and-play and end-to-end tra
 ## SIRS
 ### Network Architecture
 
+<div align="center">
+  <img src="resources/framework.png" width="600"/>
+</div>
+
 The SIRS architecture takes images, masks, and text as input. 
 Segmentation and similarity results are derived after passing through SSA and AMW, which are both plug-and-play.
 
@@ -34,6 +39,53 @@ The former is to perceive background noise, while the latter learns foreground c
 ##
 The module structure of AMW.
 It is based on the ideas of feature pyramid and intermediate supervision and performs many-to-many similarity calculations with text features.
+
+### Installation
+
+```shell
+Python 3
+PyTorch > 0.3
+Numpy
+h5py
+nltk
+yaml
+```
+
+### training 
+
+simply run
+
+```python
+python train.py --path_opt ${your_config.yaml}
+```
+
+You can find several samples in ./option directory.
+
+### testing
+
+```python
+python test.py --path_opt ${your_config.yaml}
+```
+
+Remember to refine the weights_path in test.py.
+
+### inference
+
+We provide some useful tools to infer the input:
+
+```python
+# calculate the average of k-folds results
+cal_k_average.py 
+
+# compare IR preds with GTs
+compare_PredGT.py
+
+# infer query results and segmentation results
+infer.py
+
+# infer single query
+infer_single.py
+```
 
 ##
 ## RSITMD-SS
